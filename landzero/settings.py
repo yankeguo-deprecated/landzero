@@ -106,7 +106,6 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ('en', 'English'),
     ('zh-hans', '简体中文')
 )
 

@@ -30,9 +30,9 @@
                     {% url 'sign_in' as sign_in_url %}
                     {% if request.path == sign_in_url %}
                         <a class="nav-link active"
-                           href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans 'Sign in' %}</a>
+                           href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
                     {% else %}
-                        <a class="nav-link" href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans 'Sign in' %}</a>
+                        <a class="nav-link" href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
                     {% endif %}
                 </li>
             </ul>
