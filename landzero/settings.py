@@ -105,9 +105,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = (
-    ('zh-hans', '简体中文')
-)
+LANGUAGES = [
+    ['zh-hans', '简体中文']
+]
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')
