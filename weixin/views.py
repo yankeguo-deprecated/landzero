@@ -11,15 +11,16 @@ def callback_mp(request: HttpRequest):
     signature = request.GET['signature']
     timestamp = request.GET['timestamp']
     nonce = request.GET['nonce']
-    echostr = request.GET['echostr']
 
     try:
-        check_signature(token=settings.WEIXIN_MP['APP_TOKEN'], signature=signature, timestamp=timestamp, nonce=nonce)
+        check_signature(token=settings.WEIXIN_MP['APP_TOKEN'], signature=signature, timestamp=timestamp,
+                        nonce=nonce)
     except InvalidSignatureException as e:
         return HttpResponse(status=403, content='invalid signature', content_type='text/plain')
 
     if request.method == 'GET':
-        return HttpResponse(echostr, content_type='text/plain')
+        echo_str = request.GET['echostr']
+        return HttpResponse(echo_str, content_type='text/plain')
     else:
         encrypt_type = request.GET['encrypt_type']
         msg_signature = request.GET['msg_signature']
