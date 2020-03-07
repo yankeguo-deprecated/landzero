@@ -1,10 +1,12 @@
 # Create your views here.
 from django.conf import settings
 from django.http import HttpResponse, HttpRequest
+from django.views.decorators.csrf import csrf_exempt
 from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
 
+@csrf_exempt
 def callback_mp(request: HttpRequest):
     signature = request.GET['signature']
     timestamp = request.GET['timestamp']
@@ -21,4 +23,4 @@ def callback_mp(request: HttpRequest):
     else:
         encrypt_type = request.GET['encrypt_type']
         msg_signature = request.GET['msg_signature']
-        return HttpResponse('', content_type='text/plain')
+        return HttpResponse('success', content_type='text/plain')
