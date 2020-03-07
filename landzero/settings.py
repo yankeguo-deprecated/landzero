@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'www.apps.WwwConfig',
-    'wechat.apps.WechatConfig',
+    'weixin.apps.WechatConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +119,7 @@ LOCALE_PATHS = [
 STATIC_URL = '/static/'
 
 STATIC_ROOT = secrets.STATIC_ROOT
+
+# Weixin MP
+
+WEIXIN_MP = secrets.WEIXIN_MP

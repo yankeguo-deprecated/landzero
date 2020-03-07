@@ -23,3 +23,11 @@ CACHES = {
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+WEIXIN_MP = {
+    'ORG_ID': '',
+    'APP_ID': '',
+    'APP_SECRET': '',
+    'APP_TOKEN': '',
+    'APP_AES_KEY': '',
+}
