@@ -10,8 +10,6 @@ def callback_mp(request: HttpRequest):
     timestamp = request.GET['timestamp']
     nonce = request.GET['nonce']
     echostr = request.GET['echostr']
-    encrypt_type = request.GET['encrypt_type']
-    msg_signature = request.GET['msg_signature']
 
     try:
         check_signature(token=settings.WEIXIN_MP['APP_TOKEN'], signature=signature, timestamp=timestamp, nonce=nonce)
@@ -21,4 +19,6 @@ def callback_mp(request: HttpRequest):
     if request.method == 'GET':
         return HttpResponse(echostr, content_type='text/plain')
     else:
+        encrypt_type = request.GET['encrypt_type']
+        msg_signature = request.GET['msg_signature']
         return HttpResponse('', content_type='text/plain')
