@@ -4,8 +4,7 @@ from .models import OpenId
 
 
 class OpenIdAdmin(admin.ModelAdmin):
-    list_display = ['open_id', 'user']
-    readonly_fields = ['user']
+    list_display = ['id', 'open_id', 'user']
 
 
 admin.site.register(OpenId, OpenIdAdmin)
