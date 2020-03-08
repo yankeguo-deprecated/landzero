@@ -9,7 +9,7 @@ class OpenIdManager(models.Manager):
         try:
             return self.model.objects.get(open_id=open_id)
         except self.model.DoesNotExist:
-            user = User.objects.create_user(username='wx_' + open_id)
+            user = User.objects.create_user(username='wx_' + open_id, first_name='用户')
             return self.model.objects.create(user=user, open_id=open_id)
 
 

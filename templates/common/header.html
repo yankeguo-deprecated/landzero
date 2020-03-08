@@ -27,17 +27,23 @@
             </ul>
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        User#{{ user.id }}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="user-navbar-dropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% fa 'user-circle-o' %}&nbsp; {{ user.first_name }}#{{ user.id }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="user-navbar-dropdown">
+                            <a class="dropdown-item" href="{% url 'sign_out' %}">{% fa 'sign-out' %}&nbsp; 退出登录</a>
+                        </div>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         {% url 'sign_in' as sign_in_url %}
                         {% if request.path == sign_in_url %}
                             <a class="nav-link active"
-                               href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
+                               href="{{ sign_in_url }}">{% fa 'sign-in' %}&nbsp; {% trans '登录' %}</a>
                         {% else %}
-                            <a class="nav-link" href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
+                            <a class="nav-link" href="{{ sign_in_url }}">{% fa 'sign-in' %}&nbsp; {% trans '登录' %}</a>
                         {% endif %}
                     </li>
                 {% endif %}
