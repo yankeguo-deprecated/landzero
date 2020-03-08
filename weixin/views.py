@@ -7,6 +7,8 @@ from wechatpy.crypto import WeChatCrypto
 from wechatpy.exceptions import InvalidSignatureException, InvalidAppIdException
 from wechatpy.utils import check_signature
 
+from .models import OpenId
+
 
 @csrf_exempt
 def callback_mp(request: HttpRequest):
@@ -45,8 +47,11 @@ def callback_mp(request: HttpRequest):
         except (InvalidSignatureException, InvalidAppIdException):
             return HttpResponse(status=403, content='invalid message', content_type='text/plain')
         msg = parse_message(raw_msg)
+
+        open_id = OpenId.objects.find_or_create(open_id=msg.source)
+
         if msg.type == 'text':
-            reply = create_reply(msg.content, msg)
+            reply = create_reply(f'User({open_id.user_id}):' + msg.content, msg)
             reply_msg = crypto.encrypt_message(reply.render(), nonce, timestamp)
             return HttpResponse(reply_msg, content_type='application/xml')
         else:
