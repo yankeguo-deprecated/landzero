@@ -117,6 +117,8 @@ LOCALE_PATHS = [
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
+LOGIN_URL = '/sign_in'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

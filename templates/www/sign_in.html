@@ -10,15 +10,37 @@
 {% include 'common/header.html' %}
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-4">
-            <h3>{% trans '登录' %}</h3>
-        </div>
-        <div class="col-md-12 text-center" style="padding-top: 280px; padding-bottom: 280px;">
-            <h3 class="text-muted">L{{ login_code }}</h3>
-            <h3 class="text-muted">{{ user_id }}</h3>
+        <div class="col-md-4 offset-md-4" style="padding-top: 6rem; padding-bottom: 6rem;">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h3 class="card-title">{% trans '登录' %}</h3>
+                </div>
+                <div class="card-body">
+                    <h5>{% fa 'qrcode' %}&nbsp; 关注微信公众号</h5>
+                    <br/>
+                    <h4 class="text-primary text-center text-monospace">landzeronet</h4>
+                </div>
+                <div class="card-body">
+                    <h5>{% fa 'keyboard-o' %}&nbsp; 发送如下代码</h5>
+                    <br/>
+                    <h4 class="text-primary text-center text-monospace">L{{ login_code }}</h4>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="text-muted">{% fa_spin 'refresh' %}&nbsp; 正在等待</h5>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 {% include 'common/footer.html' %}
+<script>
+    setInterval(function () {
+        $.getJSON('/signed_in', function (data) {
+            if (data.signed_in) {
+                location.reload();
+            }
+        });
+    }, 3000);
+</script>
 </body>
 </html>

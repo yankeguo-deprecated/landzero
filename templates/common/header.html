@@ -26,15 +26,21 @@
                 -->
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    {% url 'sign_in' as sign_in_url %}
-                    {% if request.path == sign_in_url %}
-                        <a class="nav-link active"
-                           href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
-                    {% else %}
-                        <a class="nav-link" href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
-                    {% endif %}
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        User#{{ user.id }}
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        {% url 'sign_in' as sign_in_url %}
+                        {% if request.path == sign_in_url %}
+                            <a class="nav-link active"
+                               href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
+                        {% else %}
+                            <a class="nav-link" href="{{ sign_in_url }}">{% fa 'user-circle-o' %} {% trans '登录' %}</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
