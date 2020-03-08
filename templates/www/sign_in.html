@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load www_extra %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,7 +14,8 @@
             <h3>{% trans '登录' %}</h3>
         </div>
         <div class="col-md-12 text-center" style="padding-top: 280px; padding-bottom: 280px;">
-            <h3 class="text-muted">网站还在建设中</h3>
+            <h3 class="text-muted">L{{ login_code }}</h3>
+            <h3 class="text-muted">{{ user_id }}</h3>
         </div>
     </div>
 </div>

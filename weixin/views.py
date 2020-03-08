@@ -7,7 +7,25 @@ from wechatpy.crypto import WeChatCrypto
 from wechatpy.exceptions import InvalidSignatureException, InvalidAppIdException
 from wechatpy.utils import check_signature
 
+from utils import login_code_manager
 from .models import OpenId
+
+
+def __handle_text(open_id: OpenId, content: str):
+    cleaned = content.replace(' ', '').lower()
+    if cleaned.startswith("l"):
+        login_code = cleaned[1:]
+        if login_code_manager.has_code(login_code):
+            login_code_manager.set_code(login_code, str(open_id.user_id))
+            return '登录成功，请刷新页面'
+        else:
+            return '没有找到登录代码，请检查是否输入正确'
+
+    return f'User#{open_id.user_id}: {content}'
+
+
+def __success_response():
+    return HttpResponse(content='success', content_type='text/plain')
 
 
 @csrf_exempt
@@ -51,8 +69,12 @@ def callback_mp(request: HttpRequest):
         open_id = OpenId.objects.find_or_create(open_id=msg.source)
 
         if msg.type == 'text':
-            reply = create_reply(f'User({open_id.user_id}):' + msg.content, msg)
-            reply_msg = crypto.encrypt_message(reply.render(), nonce, timestamp)
-            return HttpResponse(reply_msg, content_type='application/xml')
+            res = __handle_text(open_id, str(msg.content).strip())
+            if res:
+                reply = create_reply(res, msg)
+                reply_msg = crypto.encrypt_message(reply.render(), nonce, timestamp)
+                return HttpResponse(content=reply_msg, content_type='application/xml')
+            else:
+                return __success_response()
         else:
-            return HttpResponse('success', content_type='text/plain')
+            return __success_response()

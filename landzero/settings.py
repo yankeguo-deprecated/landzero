@@ -113,6 +113,10 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')
 ]
 
+# Session
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
