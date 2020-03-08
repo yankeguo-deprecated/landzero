@@ -19,7 +19,7 @@ def __handle_text(open_id: OpenId, content: str):
             login_code_manager.set_code_user(login_code, str(open_id.user_id))
             return '登录成功，请刷新页面'
         else:
-            return '没有找到登录代码，请检查是否输入正确'
+            return '不正确的登录代码，请检查输入是否正确'
 
     return f'User#{open_id.user_id}: {content}'
 
