@@ -33,6 +33,11 @@
                             {% fa 'user-circle-o' %}&nbsp; {{ user.first_name }}#{{ user.id }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="user-navbar-dropdown">
+                            {% if user.is_superuser %}
+                                <a class="dropdown-item" href="{% url 'admin:index' %}">{% fa 'dashboard' %}&nbsp;
+                                    管理台</a>
+                                <div class="dropdown-divider"></div>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'sign_out' %}">{% fa 'sign-out' %}&nbsp; 退出登录</a>
                         </div>
                     </li>
