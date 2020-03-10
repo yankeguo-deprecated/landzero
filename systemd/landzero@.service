@@ -1,0 +1,11 @@
+[Unit]
+Description=landzero %I daemon
+After=network.target
+
+[Service]
+User=app
+Group=app
+ExecStart=/opt/app/landzero/systemd/run.sh %i
+
+[Install]
+WantedBy=multi-user.target
