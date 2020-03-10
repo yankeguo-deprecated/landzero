@@ -1,4 +1,6 @@
 # Create your views here.
+from typing import Optional
+
 from django.conf import settings
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
@@ -7,21 +9,21 @@ from wechatpy.crypto import WeChatCrypto
 from wechatpy.exceptions import InvalidSignatureException, InvalidAppIdException
 from wechatpy.utils import check_signature
 
-from utils import login_code_manager
+from utils import lcm
 from .models import OpenId
 
 
-def __handle_text(open_id: OpenId, content: str):
+def __handle_text(open_id: OpenId, content: str) -> Optional[str]:
     cleaned = content.replace(' ', '').lower()
     if cleaned.startswith("l"):
         login_code = cleaned[1:]
-        if login_code_manager.has_code(login_code):
-            login_code_manager.set_code_user(login_code, str(open_id.user_id))
+        if lcm.exist(login_code):
+            lcm.set_user_id(login_code, str(open_id.user_id))
             return '登录成功，请刷新页面'
         else:
             return '不正确的登录代码，请检查输入是否正确'
 
-    return f'User#{open_id.user_id}: {content}'
+    return None
 
 
 def __success_response():
