@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
+    'django_celery_beat',
     'www.apps.WwwConfig',
     'weixin.apps.WechatConfig',
 ]
@@ -125,6 +127,16 @@ LOGIN_URL = '/sign_in'
 STATIC_URL = '/static/'
 
 STATIC_ROOT = secrets.STATIC_ROOT
+
+# Celery
+
+CELERY_BROKER_URL = secrets.CELERY_BROKER_URL
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_CACHE_BACKEND = 'django-cache'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # Weixin MP
 

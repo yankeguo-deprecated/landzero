@@ -22,6 +22,8 @@ CACHES = {
     },
 }
 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 WEIXIN_MP = {
