@@ -17,7 +17,7 @@ class Post(models.Model):
 def pre_save_post_receiver(sender, instance: Post, *args, **kwargs):
     if not instance.content_md:
         instance.content_md = ''
-    instance.content_html = markdown.markdown(instance.content_md)
+    instance.content_html = markdown.markdown(instance.content_md, extensions=['extra'])
 
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
