@@ -7,11 +7,17 @@
 <body>
 {% include 'common/header.html' %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 text-center" style="padding-top: 280px; padding-bottom: 280px;">
-            <h3 class="text-muted">网站还在建设中</h3>
+    {% for post in posts %}
+        <div class="row pt-5">
+            <div class="col-md-4 text-lg-right">
+                <h4 class="text-secondary">{{ post.timestamp | date:"Y/m/d" }}</h4>
+            </div>
+            <div class="col-md-8">
+                <h4><a href="{% url 'view_post' post.slug %}">{{ post.title }}</a></h4>
+            </div>
         </div>
-    </div>
+    {% endfor %}
+    <div class="row pt-5"></div>
 </div>
 {% include 'common/footer.html' %}
 </body>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>LandZERØ</title>
+    {% include 'common/head.html' %}
+    <style>
+        h1 {
+            font-size: 2.1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        h5 {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+{% include 'common/header.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center pt-5">
+            <h1>{{ post.title }}</h1>
+        </div>
+
+        <div class="col-md-12 pt-5">
+            {{ content }}
+        </div>
+    </div>
+    <div class="row pt-5"></div>
+</div>
+{% include 'common/footer.html' %}
+</body>
+</html>
